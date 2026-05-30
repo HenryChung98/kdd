@@ -17,6 +17,7 @@ import { MoreHorizontal } from "lucide-react"
 import { Button } from "@/components/ui/button"
 
 import { useState } from "react"
+import { employees } from "@/lib/mock"
 
 interface Employee {
   id: string
@@ -108,6 +109,10 @@ export const defaultProjects: Project[] = [
   },
 ];
 
+function getEmployeeName(id: string) {
+  return employees.find((e) => e.id === id)?.name ?? id
+}
+
 export function ProjectTable() {
   const [projects, setProjects] = useState<Project[]>(defaultProjects)
 
@@ -138,7 +143,7 @@ export function ProjectTable() {
               <TableRow key={project.id}>
                 <TableCell className="font-medium">{project.name}</TableCell>
                 <TableCell>{project.status}</TableCell>
-                <TableCell>{project.ownerId}</TableCell>
+                <TableCell>{getEmployeeName(project.ownerId)}</TableCell>
                 <TableCell>
                   <DropdownMenu>
                     <DropdownMenuTrigger asChild>

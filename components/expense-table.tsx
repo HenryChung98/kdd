@@ -92,6 +92,10 @@ export const defaultExpenses: Expense[] = [
   },
 ]
 
+function getEmployeeName(id: string) {
+  return employees.find((e) => e.id === id)?.name ?? id
+}
+
 export function ExpenseTable() {
   const [expenses, setExpenses] = useState<Expense[]>(defaultExpenses)
 
@@ -125,7 +129,7 @@ export function ExpenseTable() {
                 <TableCell className="font-medium">{expense.title}</TableCell>
                 <TableCell>{expense.amount}</TableCell>
                 <TableCell>{expense.category}</TableCell>
-                <TableCell>{expense.submittedBy}</TableCell>
+                <TableCell>{getEmployeeName(expense.submittedBy)}</TableCell>
                 <TableCell>{expense.status}</TableCell>
                 <TableCell>{expense.date}</TableCell>
                 <TableCell>
